@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title >CONTACTS</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body >
+    <div id='vueDiv' >
+      {{message}} 1
+    </div>
+
+    <script>
+      const vueApp = {
+        data(){
+          return {
+            message: 'Hello from vue!'
+          }
+        }
+      }
+
+      Vue.createApp(vueApp).mount('#vueDiv');
+    </script>
+
+  </body>
+</html>
+
