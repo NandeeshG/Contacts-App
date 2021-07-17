@@ -1,25 +1,96 @@
 <!DOCTYPE html>
 <html lang='en'>
-  <head>
+  <head >
     <title >CONTACTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+
     <script src="https://unpkg.com/vue@next"></script>
+    <style >
+      .flex-container-header{
+        display: flex;
+        flex-direction: row; /* left to right direction of placement */
+        flex-wrap: nowrap; /* overflow to new line */
+        /*flex-flow: row nowrap; */
+        justify-content: space-between; /* space between items in one flex line */
+        align-items: stretch; /* items cover full height in small screens */
+        align-content: stretch; /* flex lines cover full height in small screens */
+
+        background-color: #4dc3ff;
+      }
+      .flex-container-header > div,button {
+        text-align: center;
+      }
+      .flex-container-header > div {
+        flex: 1 1 15em;
+      }
+      .flex-container-header > button {
+        flex: 1 1 1em;
+        /* TODO: Add floating beautiful buttons */
+      }
+
+      /*Mobile phones  -- Ditching this for now
+      @media (max-width: 800px) {  
+        .flex-container-header {
+          flex-flow: column nowrap;
+        }
+        .flex-container-header > div,button {
+          line-height: 1em;
+          flex: 0 0 10px;
+          text-align: center;
+        }
+      }*/
+    </style>
   </head>
   <body >
     <div id='vueDiv' >
-      {{message}} 1
+      <div id='header' class="flex-container-header" >
+        <button id="btn-contact-save" >
+          <h4 > SAVE </h4>
+        </button>
+        <div > <h2 id="header-text" >
+            Contact
+        </h2> </div>
+        <button id="btn-contact-cancel" >
+          <h4 > CANCEL </h4>
+        </button>
+      </div>
+
+        <br/>
+
     </div>
 
-    <script>
-      const vueApp = {
-        data(){
-          return {
-            message: 'Hello from vue!'
+      <script>
+        const vueApp = {
+          data(){
+            return {
+              message: 'Hello from vue!',
+              hover: 'You hovered on' + new Date().toLocaleString(),
+              name: ''
+            }
+          },
+          methods:{
+            alertMessage(msg){
+              alert(msg)
+            },
+            submitForm(event,msg){
+              console.log(event);
+              if(event.cancelable){
+                console.log(event.cancelable, "YES")
+                event.preventDefault();
+              }
+              this.alertMessage(msg);
+            }
+          },
+          mounted(){
+            setInterval( ()=>{this.message+='aa'},877 )
+            setInterval( ()=>{this.message = this.message.slice(0,-1)},1113 )
+            setInterval( ()=>{this.hover = new Date().toLocaleString()},200 )
           }
         }
-      }
 
-      Vue.createApp(vueApp).mount('#vueDiv');
-    </script>
+Vue.createApp(vueApp).mount('#vueDiv');
+      </script>
 
   </body>
 </html>
