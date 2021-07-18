@@ -27,8 +27,15 @@ export default {
       last_name: 'Gupta',
       email: 'nandeeshgupta@gmail.com',
       phone: '8860024488',
-      groups: ['IHS','DPS','Codechef'],
-      social_media: [],
+      groups: ['IHS','DPS','Codechef','DPS'], //At max 4 groups only
+      social_media: [
+                      {link:'https://www.facebook.com', src:'facebook.png', text:'Facebook'},
+                      {link:'https://www.github.com', src:'github.png', text:'Github'},
+                      {link:'https://www.instagram.com', src:'instagram.png', text:'Instagram'},
+                      {link:'https://www.linkedin.com', src:'linkedin.png', text:'Linkedin'},
+                      {link:'https://www.twitter.com', src:'twitter.png', text:'Twitter'},
+                      {link:'https://www.youtube.com', src:'youtube.png', text:'Youtube'},
+                    ],
       default_img: 'avatar.png'
     }
   },

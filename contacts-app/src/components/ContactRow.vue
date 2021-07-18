@@ -1,50 +1,41 @@
 <template>
-
-  <div class="root-container flex-row-nowrap">
-    <img class="small-image round-image" :src="avatar_src" />
-
-    <div class="detail-container flex-col-nowrap">
-      <img class="small-image round-image" :src="avatar_src" />
-      <img class="small-image round-image" :src="avatar_src" />
-      <!--<div class="name-container height-limit">
-        <h3>{{first_name}}</h3>
-        <h3>{{last_name}}</h3>
+  <div class="MAIN">
+      <div class="BLOCK" id="avatar_container">
+        <img class="AVATAR" :src="avatar_src" alt="Avatar"/>
       </div>
-      <div class="group-container height-limit">
-        <h4 v-for="group in groups" :key="group" class="group-pill">
-          {{group}}
-        </h4>
-      </div>-->
-    </div>
-
-    <div class="contact-container flex-col-nowrap">
-      <div class="email-phone-container flex-row-nowrap">
-        <button class="flat-button round-button-10">{{email}}</button>
-        <button class="flat-button round-button-10">{{phone}}</button>
+      <div class="BLOCK">
+          <div class="ROW">
+            <h3 class="INFO_HEADER" style="padding:2px 0px;">{{first_name}}</h3>
+            <h3 class="INFO_HEADER" style="padding:2px 0px;">{{last_name}}</h3>
+            <span v-if="groups.length">,</span>
+            <div class="ROW GROUP_CONTAINER">
+              <h5 v-for="(group,id) in groups" class="GROUP" :key="id">{{group}}</h5>
+            </div>
+          </div>
+          <div class="ROW">
+            <button class="INFO_BUTTON" title="Click to Copy">{{'Mob: '+(phone || 'Unavailable')}}</button>
+            <button class="INFO_BUTTON" title="Click to Email">{{email || 'No Email ID'}}</button>
+          </div>
       </div>
-      <div class="social-media-container flex-row-nowrap">
-        <div v-for="sm in social_media" :key="sm.link">
-          <button class="icon-button">
-            <a :href="sm.link" target="_blank" class="icon-anchor">
-              <img class="round-image small-image" :src="sm.image_src" />
-            </a>
-          </button>
-        </div>
+      <div class="BLOCK" id="SMBLOCK">
+          <div class="ROW">
+            <h5 v-for="(sm,id) in social_media.slice(0,3)" class="SOCIAL_MEDIA" :key="id">
+              <a target="_blank" :href="sm.link">
+                <img class="ICON" :src="sm.src" :alt="sm.text"/>
+              </a>
+            </h5>
+          </div>
+          <div class="ROW">
+            <h5 v-for="(sm,id) in social_media.slice(3)" class="SOCIAL_MEDIA" :key="id">
+              <a target="_blank" :href="sm.link">
+                <img class="ICON" :src="sm.src" :alt="sm.text"/>
+              </a>
+            </h5>
+          </div>
       </div>
-    </div>
-
-    <div class="action-container flex-col-nowrap">
-      <div class="action-1-container flex-row-nowrap">
-        <!-- TODO -> Edit icon here -->
-        <button class="round-button-10">EDIT</button>
-      </div>
-      <div class="action-2-container flex-row-nowrap">
-        <!-- TODO -> Delete icon here -->
-        <button class="round-button-10">DELETE</button>
-      </div>
-    </div>
   </div>
-
+  
+  <br/> <br/>
 </template>
 
 <script>
@@ -68,61 +59,92 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.MAIN{
+  display: flex;
+  flex-flow: row wrap; 
+  justify-content: flex-start; 
+  background-color: #eeeeee; 
+}
 
-.flex-row-nowrap{
+.BLOCK{
   display: flex;
-  flex: row nowrap;
+  flex-flow: column nowrap; 
+  justify-content: space-around;
+  margin: 2px 2px;
 }
-.flex-row-wrap{
+
+.ROW{
   display: flex;
-  flex: row wrap;
-}
-.flex-col-nowrap{
-  display: flex;
-  flex: column nowrap;
-}
-.flex-col-wrap{
-  display: flex;
-  flex: column wrap;
-}
-.round-image{
-  border-radius: 50%;
-}
-.small-image{
-  width: 2.5em;
-  height: 2.5em;
-  border: 2px dashed orange;
-}
-.image-container{
-  display: flex;
-  flex: 0.5 0.5 5px;
-}
-.flat-button{
-  
-}
-.round-button-10{
-  border: 10%;
-}
-.root-container{
-  display: flex;
-  justify-content: flex-start;
-  background-color: #e6ffff;
-  height: 100px;
-}
-.group-pill{
-  border: 1px solid grey;
-  font-size: 0.5em;
-  border-radius: 30%;
-  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
 }
-.height-limit{
-  height: 50%;
+
+.GROUP_CONTAINER{
 }
-.detail-container{
-  display:flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+.GROUP{
+  margin: 0.25em 0.5em;
+  padding: 2px;
+  border-right: 1px solid red;
+  border-left:  1px solid red;
+  border-radius: 20%;
 }
+
+.INFO_HEADER{
+  margin: 0.25em 0.15em;
+  padding: 3px;
+  /*border-radius: 10%;
+  border: solid 1px #cccccc;*/
+  font-family: Helvetica;
+}
+
+.INFO_BUTTON{
+  margin: 0.25em 0.5em;
+  padding: 3px; 
+  font-size: 1em;
+/*  border-radius: 10%;
+  border: solid 1px #cccccc; */
+}
+
+.ICON{
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 50%;
+  margin: 0.25em 0.5em;
+}
+
+.AVATAR{
+  height: 5em;
+  width: 5em;
+  border-radius: 50%;
+  border: 3px solid black;
+  margin: 0.25em 0.35em;
+}
+
+/* Med-Small screens */
+@media all and (max-width: 600px) {
+  #avatar_container {
+    width: 100%;
+    align-items: center;
+  }
+  .MAIN{
+    justify-content: space-around;
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 510px) {
+  .BLOCK{
+    width: 100%;
+  }
+  .ROW{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #SMBLOCK{
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
 </style>
