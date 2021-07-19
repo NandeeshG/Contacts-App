@@ -27,6 +27,7 @@
     :first_name="c.first_name" :last_name="c.last_name" 
     :avatar_src="c.user_img" :groups="c.groups" :email="c.email"
     :phone="c.phone" :social_media="c.social_media" />
+
   </div>
 </template>
 
@@ -47,7 +48,6 @@
             social_media: [],
             user_img: 'avatar.png'
         },
-        contacts:[],
         master_social_media: [
             {link:'https://www.facebook.com', src:'facebook.png', text:'Facebook'},
             {link:'https://www.github.com', src:'github.png', text:'Github'},
@@ -69,7 +69,8 @@
       },
       addTmp(){
         if(this.tmp.first_name.length>0 || this.tmp.email.length>0){
-          this.contacts.push({...this.tmp});
+          this.$store.commit('addNewEntry');
+          this.$store.commit('changeContact',this.contactsLength()-1,this.tmp);
         }
       },
       clearTmp(){
@@ -89,6 +90,15 @@
     name: 'App',
     components: {
         ContactRow
+    },
+    computed:{
+      contactsLength(){
+        console.log(this.$store.contacts.length)
+        return this.$store.contacts.length
+      },
+      contacts(){
+        return this.$store.contacts
+      },
     }
   }
 </script>
