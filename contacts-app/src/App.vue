@@ -70,7 +70,8 @@
       addTmp(){
         if(this.tmp.first_name.length>0 || this.tmp.email.length>0){
           this.$store.commit('addNewEntry');
-          this.$store.commit('changeContact',this.contactsLength()-1,this.tmp);
+          this.$store.commit('changeFirstName',this.contactsLength-1,this.tmp.first_name);
+          //this.$store.commit('changeContact',this.contactsLength-1,{...this.tmp});
         }
       },
       clearTmp(){
@@ -93,11 +94,10 @@
     },
     computed:{
       contactsLength(){
-        console.log(this.$store.contacts.length)
-        return this.$store.contacts.length
+        return this.$store.state.contacts.length
       },
       contacts(){
-        return this.$store.contacts
+        return this.$store.state.contacts
       },
     }
   }
